@@ -1,0 +1,10 @@
+{
+  "/api/send-email/route": "app/api/send-email/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/extrack-privacy-policy/page": "app/extrack-privacy-policy/page.js",
+  "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/page": "app/page.js",
+  "/projects/page": "app/projects/page.js"
+}

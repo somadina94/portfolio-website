@@ -1,0 +1,10 @@
+{
+  "/api/send-email/route": "/api/send-email",
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/extrack-privacy-policy/page": "/extrack-privacy-policy",
+  "/about/page": "/about",
+  "/contact/page": "/contact",
+  "/page": "/",
+  "/projects/page": "/projects"
+}
