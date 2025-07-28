@@ -8,7 +8,30 @@ echo "🐳 Starting Docker deployment of Williams Portfolio..."
 # Check Docker installation
 echo "✅ Checking Docker installation..."
 docker --version
-docker-compose --version
+
+# Check for docker-compose or docker compose (newer versions use 'docker compose')
+if command -v docker-compose &> /dev/null; then
+    echo "✅ docker-compose found"
+    DOCKER_COMPOSE="docker-compose"
+elif docker compose version &> /dev/null; then
+    echo "✅ docker compose found"
+    DOCKER_COMPOSE="docker compose"
+else
+    echo "❌ Neither docker-compose nor docker compose found"
+    echo "📥 Installing docker-compose..."
+    sudo apt update
+    sudo apt install docker-compose-plugin -y
+    DOCKER_COMPOSE="docker compose"
+fi
+
+# Add user to docker group to avoid permission issues
+if ! groups $USER | grep -q docker; then
+    echo "🔧 Adding user to docker group..."
+    sudo usermod -aG docker $USER
+    echo "⚠️  Please log out and log back in, or run: newgrp docker"
+    echo "   Then run this script again."
+    exit 1
+fi
 
 # Check for environment variables
 echo "🔍 Checking for environment variables..."
@@ -26,7 +49,7 @@ mkdir -p logs
 
 # Stop and remove existing containers
 echo "🛑 Stopping existing containers..."
-docker-compose down
+$DOCKER_COMPOSE down
 
 # Remove old images to free up space
 echo "🧹 Cleaning up old images..."
@@ -34,19 +57,19 @@ docker image prune -f
 
 # Build and start the application
 echo "🔨 Building and starting the application..."
-docker-compose up --build -d
+$DOCKER_COMPOSE up --build -d
 
 # Check if the container is running
 echo "📊 Checking container status..."
 sleep 5
-docker-compose ps
+$DOCKER_COMPOSE ps
 
 # Show logs
 echo "📋 Recent logs:"
-docker-compose logs --tail=20
+$DOCKER_COMPOSE logs --tail=20
 
 echo "✅ Docker deployment completed!"
-echo "📊 Check status with: docker-compose ps"
-echo "📋 View logs with: docker-compose logs -f"
-echo "🔄 Restart with: docker-compose restart"
-echo "🛑 Stop with: docker-compose down" 
+echo "📊 Check status with: $DOCKER_COMPOSE ps"
+echo "📋 View logs with: $DOCKER_COMPOSE logs -f"
+echo "🔄 Restart with: $DOCKER_COMPOSE restart"
+echo "🛑 Stop with: $DOCKER_COMPOSE down" 
