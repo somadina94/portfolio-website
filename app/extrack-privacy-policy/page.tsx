@@ -1,6 +1,6 @@
 export default function ExTrackPrivacyPolicy() {
   return (
-    <section className="px-12 border-b border-border py-12">
+    <section className="px-2 md:px-12 border-b border-border py-12">
       <div className="flex flex-col gap-4">
         <h3>Introduction</h3>
         <p className="text-muted-foreground">

@@ -6,7 +6,7 @@ import williams from "@/assets/williams.jpg";
 
 export function Hero() {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center px-12 gap-4 border-b border-border pb-12">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-border pb-12">
       <div className="flex flex-col gap-4">
         <h1>
           Hello, I&apos;m
@@ -28,7 +28,7 @@ export function Hero() {
           </Button>
           <Button asChild variant="outline">
             <Link
-              href="https://github.com/somadina-onuaguluchi"
+              href="https://github.com/somadina94"
               className="text-primary hover:text-primary/80"
             >
               <GithubIcon />

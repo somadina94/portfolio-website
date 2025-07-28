@@ -5,7 +5,7 @@ export default function AboutMe({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row justify-between px-12 border-b border-border py-12 md:pb-60",
+        "flex flex-col md:flex-row justify-between border-b border-border py-12 md:pb-60",
         className
       )}
       id="about-me"

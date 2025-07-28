@@ -13,9 +13,9 @@ export default async function Featured() {
     .eq("featured", true);
 
   return (
-    <div className="px-12 border-b border-border py-12">
+    <div className="border-b border-border py-12">
       <div className="flex flex-col gap-4 mb-8">
-        <h2>Featured Projects</h2>
+        <h2 className="text-primary">Featured Projects</h2>
         <p className="text-muted-foreground">
           Here are some of the selected projects that showcase my passion for
           software development.

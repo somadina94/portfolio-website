@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function Contact() {
   return (
-    <div>
+    <div className="px-2 md:px-12">
       <ContactMe />
     </div>
   );

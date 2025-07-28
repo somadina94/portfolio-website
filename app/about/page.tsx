@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div className="px-12 border-b border-border">
+    <div className="px-2 md:px-12 border-b border-border py-12">
       <AboutMe className="md:pb-0 pb-12 px-0 " />
       <div className="flex flex-col md:flex-row justify-between gap-4 py-12">
         <div className="flex flex-col gap-4">

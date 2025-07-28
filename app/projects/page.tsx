@@ -19,7 +19,7 @@ export default async function Projects() {
   }
 
   return (
-    <div className="px-12 border-b border-border py-12">
+    <div className="px-2 md:px-12 border-b border-border py-12">
       <div className="flex flex-col gap-4 mb-8">
         <h2>Projects</h2>
         <p className="text-muted-foreground">
