@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Header } from "@/components/general/header";
 import Footer from "@/components/general/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 // Fallback fonts for Docker build
 const geistSans = {
@@ -45,6 +46,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

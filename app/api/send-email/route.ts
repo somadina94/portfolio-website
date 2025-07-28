@@ -46,28 +46,39 @@ export async function POST(req: NextRequest) {
     })
   );
 
-  // Configure Nodemailer
+  // Configure Nodemailer with Zoho SMTP settings
   const transporter = nodemailer.createTransport({
-    service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+    host: process.env.NEXT_PUBLIC_SMTP_HOST || "smtp.zoho.com",
+    port: parseInt(process.env.NEXT_PUBLIC_SMTP_PORT || "587"),
+    secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.NEXT_PUBLIC_EMAIL_ADDRESS,
       pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false, // Only use this in development
     },
   });
 
   const mailOptions = {
     from: process.env.NEXT_PUBLIC_EMAIL_ADDRESS,
     to: process.env.NEXT_PUBLIC_EMAIL_ADDRESS,
-    subject: subject,
+    subject: `Contact Form: ${subject}`,
     html: emailHtml,
+    replyTo: email, // Allow direct reply to the sender
   };
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    return NextResponse.json({ success: true, info });
+    return NextResponse.json({ success: true, messageId: info.messageId });
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: (error as Error).message },
+      {
+        success: false,
+        error: (error as Error).message,
+        details:
+          "Please check your SMTP configuration and environment variables",
+      },
       { status: 500 }
     );
   }

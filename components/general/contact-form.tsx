@@ -17,7 +17,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -35,7 +34,6 @@ const contactSchema = z.object({
 const formSchema = contactSchema;
 
 export default function ContactForm() {
-  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,7 +52,7 @@ export default function ContactForm() {
 
     if (response.ok) {
       toast.success("Email sent successfully");
-      router.push("/");
+      form.reset();
     } else {
       toast.error("Failed to send email");
     }
