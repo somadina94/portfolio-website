@@ -5,10 +5,10 @@
 
 echo "🔧 Fixing Docker setup..."
 
-# Install docker-compose-plugin
-echo "📥 Installing docker-compose-plugin..."
-sudo apt update
-sudo apt install docker-compose-plugin -y
+# Install docker-compose
+echo "📥 Installing docker-compose..."
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
 # Add user to docker group
 echo "🔧 Adding user to docker group..."

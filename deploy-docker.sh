@@ -19,9 +19,10 @@ elif docker compose version &> /dev/null; then
 else
     echo "❌ Neither docker-compose nor docker compose found"
     echo "📥 Installing docker-compose..."
-    sudo apt update
-    sudo apt install docker-compose-plugin -y
-    DOCKER_COMPOSE="docker compose"
+    # Install standalone docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    DOCKER_COMPOSE="docker-compose"
 fi
 
 # Add user to docker group to avoid permission issues
