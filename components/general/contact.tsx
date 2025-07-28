@@ -19,7 +19,7 @@ export default function Contact() {
           </Link>
           or checkout my resume{" "}
           <Link
-            href="/assets/resume.pdf"
+            href="/resume.pdf"
             className="text-primary hover:text-primary/80 border-b border-primary"
           >
             RESUME
@@ -32,7 +32,7 @@ export default function Contact() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-12 h-12">
-            <Link href={"https://github.com/williamsonuaguluchi"}>
+            <Link href={"https://github.com/somadina94"}>
               <GithubIcon size={6} className="text-primary" />
             </Link>
           </Button>
