@@ -26,7 +26,11 @@ export default function About() {
           <Button variant="outline">React Native</Button>
           <Button variant="outline">Expo</Button>
           <Button variant="outline">Shadcn UI</Button>
-
+          <Button variant="outline">Vercel</Button>
+          <Button variant="outline">Netlify</Button>
+          <Button variant="outline">Heroku</Button>
+          <Button variant="outline">Render</Button>
+          <Button variant="outline">Github Actions</Button>
           <Button variant="outline">Next.js</Button>
           <Button variant="outline">Tailwind CSS</Button>
           <Button variant="outline">TypeScript</Button>
