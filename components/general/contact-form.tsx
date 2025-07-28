@@ -24,6 +24,16 @@ import { Textarea } from "../ui/textarea";
 import { toast } from "sonner";
 import { useEffect } from "react";
 
+// Add type declaration for grecaptcha
+declare global {
+  interface Window {
+    grecaptcha: {
+      getResponse: () => string;
+      reset: () => void;
+    };
+  }
+}
+
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
@@ -45,16 +55,34 @@ export default function ContactForm() {
   });
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    // Get the reCAPTCHA token
+    const token = window.grecaptcha?.getResponse();
+
+    if (!token) {
+      toast.error("Please complete the reCAPTCHA");
+      return;
+    }
+
     const response = await fetch("/api/send-email", {
       method: "POST",
-      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...data,
+        token,
+      }),
     });
 
     if (response.ok) {
       toast.success("Email sent successfully");
       form.reset();
+      // Reset reCAPTCHA
+      window.grecaptcha?.reset();
     } else {
       toast.error("Failed to send email");
+      // Reset reCAPTCHA on error
+      window.grecaptcha?.reset();
     }
   };
 
