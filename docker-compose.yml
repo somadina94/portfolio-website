@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  williams-portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: williams-portfolio
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env.local
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - williams-network
+
+networks:
+  williams-network:
+    driver: bridge
