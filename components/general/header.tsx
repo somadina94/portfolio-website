@@ -8,7 +8,7 @@ export function Header() {
         href="/"
         className="font-bold md:text-2xl py-2 text-primary hover:text-primary/80"
       >
-        WILLIAMSS
+        WILLIAMS
       </Link>
       <LightDarkToggle />
       <div className="flex items-center gap-4 uppercase">
