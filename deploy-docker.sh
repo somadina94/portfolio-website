@@ -36,12 +36,22 @@ fi
 
 # Check for environment variables
 echo "🔍 Checking for environment variables..."
-if [ -f ".env.local" ]; then
-    echo "✅ .env.local file found"
+if [ -f ".env" ]; then
+    echo "✅ .env file found"
+    echo "📤 Exporting environment variables..."
+    export $(cat .env | xargs)
+    echo "✅ Environment variables exported"
+elif [ -f ".env.local" ]; then
+    echo "✅ .env.local file found, copying to .env..."
+    cp .env.local .env
+    echo "📤 Exporting environment variables..."
+    export $(cat .env | xargs)
+    echo "✅ Environment variables exported"
 else
-    echo "⚠️  No .env.local file found"
-    echo "📝 You may need to create .env.local with your environment variables"
+    echo "⚠️  No .env or .env.local file found"
+    echo "📝 You may need to create .env with your environment variables"
     echo "   Example: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, etc."
+    exit 1
 fi
 
 # Create logs directory
@@ -58,6 +68,8 @@ docker image prune -f
 
 # Build and start the application
 echo "🔨 Building and starting the application..."
+echo "🔍 Verifying environment variables are available..."
+echo "NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:0:20}..."
 $DOCKER_COMPOSE up --build -d
 
 # Check if the container is running
