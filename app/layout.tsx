@@ -27,9 +27,26 @@ export const metadata: Metadata = {
   title: "Williams Portfolio",
   description: "Williams Portfolio",
   openGraph: {
-    title: "Williams Onuguluchi",
+    title: "Williams Onuaguluchi",
     description: "Learn more about Williams Onuaguluchi.",
-    images: ["/public/williams.jpg"],
+    url: "https://jahbyte.com",
+    siteName: "Williams Portfolio",
+    images: [
+      {
+        url: "https://jahbyte.com/williams.jpg",
+        width: 630,
+        height: 800,
+        alt: "Williams Onuaguluchi",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Williams Onuaguluchi",
+    description: "Learn more about Williams Onuaguluchi.",
+    images: ["https://jahbyte.com/williams.jpg"],
   },
 };
 
