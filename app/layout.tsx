@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Williams Onuguluchi",
     description: "Learn more about Williams Onuaguluchi.",
-    images: ["/assets/williams.jpg"],
+    images: ["/public/williams.jpg"],
   },
 };
 
