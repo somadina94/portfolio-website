@@ -26,6 +26,11 @@ const geistMono = {
 export const metadata: Metadata = {
   title: "Williams Portfolio",
   description: "Williams Portfolio",
+  openGraph: {
+    title: "Williams Onuguluchi",
+    description: "Learn more about Williams Onuaguluchi.",
+    images: ["/assets/williams.jpg"],
+  },
 };
 
 export default function RootLayout({
