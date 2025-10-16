@@ -12,7 +12,7 @@ export function Hero() {
           Hello, I&apos;m
           <br /> Williams Onuaguluchi
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground max-w-md">
           An African based software engineer passionate about building
           accessible and user friendly websites and mobile applications.
         </p>
