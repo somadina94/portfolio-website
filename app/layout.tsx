@@ -24,30 +24,8 @@ const geistMono = {
 };
 
 export const metadata: Metadata = {
-  title: "Williams Portfolio",
-  description: "Williams Portfolio",
-  openGraph: {
-    title: "Williams Onuaguluchi",
-    description: "Learn more about Williams Onuaguluchi.",
-    url: "https://jahbyte.com",
-    siteName: "Williams Portfolio",
-    images: [
-      {
-        url: "https://localhost:3000/williams.jpg",
-        width: 630,
-        height: 800,
-        alt: "Williams Onuaguluchi",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Williams Onuaguluchi",
-    description: "Learn more about Williams Onuaguluchi.",
-    images: ["https://jahbyte.com/williams.jpg"],
-  },
+  title: "Williams Onuaguluchi",
+  description: "Official website of Williams Onuaguluchi",
 };
 
 export default function RootLayout({

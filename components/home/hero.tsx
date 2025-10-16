@@ -17,7 +17,9 @@ export function Hero() {
           accessible and user friendly websites and mobile applications.
         </p>
         <div className="flex gap-4">
-          <Button>Contact me</Button>
+          <Button asChild>
+            <Link href="#contact-me">Contact</Link>
+          </Button>
           <Button asChild variant="outline">
             <Link
               href="https://www.linkedin.com/in/somadina-onuaguluchi-3aa8b02a1/"

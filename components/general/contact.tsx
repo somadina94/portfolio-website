@@ -5,7 +5,10 @@ import ContactForm from "./contact-form";
 
 export default function Contact() {
   return (
-    <div className="flex flex-col md:justify-between md:flex-row border-b border-border py-10 gap-10">
+    <div
+      className="flex flex-col md:justify-between md:flex-row border-b border-border py-10 gap-10"
+      id="contact-me"
+    >
       <div className="space-y-12">
         <h2 className="text-primary">LET&apos;S CONNECT</h2>
         <p className="max-w-lg">
