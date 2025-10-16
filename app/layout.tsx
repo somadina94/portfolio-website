@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "Williams Portfolio",
     images: [
       {
-        url: "https://jahbyte.com/williams.jpg",
+        url: "https://localhost:3000/williams.jpg",
         width: 630,
         height: 800,
         alt: "Williams Onuaguluchi",
