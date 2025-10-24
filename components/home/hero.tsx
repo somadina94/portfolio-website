@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
-import williams from "@/assets/williams.jpg";
+import williams from "@/assets/williams.jpeg";
 
 export function Hero() {
   return (
