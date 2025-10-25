@@ -25,7 +25,7 @@ export default function Contact() {
             href="/resume.pdf"
             className="text-primary hover:text-primary/80 border-b border-primary"
           >
-            RESUME
+            resume
           </Link>
         </p>
         <div className="flex gap-4">
