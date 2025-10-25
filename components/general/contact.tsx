@@ -20,7 +20,7 @@ export default function Contact() {
           >
             williamsonuaguluchi94@gmail.com{" "}
           </Link>
-          or checkout my
+          or checkout my{" "}
           <Link
             href="/resume.pdf"
             className="text-primary hover:text-primary/80 border-b border-primary"
