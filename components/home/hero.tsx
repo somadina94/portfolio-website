@@ -22,8 +22,9 @@ export function Hero() {
           </Button>
           <Button asChild variant="outline">
             <Link
-              href="https://www.linkedin.com/in/somadina-onuaguluchi-3aa8b02a1/"
+              href="https://www.linkedin.com/in/williams-onuaguluchi-3aa8b02a1"
               className="text-primary hover:text-primary/80"
+              target="_blank"
             >
               <LinkedinIcon />
             </Link>
@@ -32,6 +33,7 @@ export function Hero() {
             <Link
               href="https://github.com/somadina94"
               className="text-primary hover:text-primary/80"
+              target="_blank"
             >
               <GithubIcon />
             </Link>

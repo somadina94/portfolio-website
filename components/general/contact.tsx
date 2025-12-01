@@ -30,13 +30,21 @@ export default function Contact() {
         </p>
         <div className="flex gap-4">
           <Button asChild variant="outline" className="w-12 h-12">
-            <Link href={"https://www.linkedin.com/in/williamsonuaguluchi/"}>
-              <LinkedinIcon size={6} className="text-primary" />
+            <Link
+              href="https://www.linkedin.com/in/williams-onuaguluchi-3aa8b02a1"
+              className="text-primary hover:text-primary/80"
+              target="_blank"
+            >
+              <LinkedinIcon />
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-12 h-12">
-            <Link href={"https://github.com/somadina94"}>
-              <GithubIcon size={6} className="text-primary" />
+            <Link
+              href="https://github.com/somadina94"
+              className="text-primary hover:text-primary/80"
+              target="_blank"
+            >
+              <GithubIcon />
             </Link>
           </Button>
         </div>
