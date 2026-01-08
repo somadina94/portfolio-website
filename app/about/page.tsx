@@ -1,5 +1,7 @@
 import AboutMe from "@/components/home/about-me";
 import { Button } from "@/components/ui/button";
+import * as motion from "motion/react-client";
+import { container, item } from "@/utils/motion-config";
 
 export const metadata = {
   title: "About | Williams Onuaguluchi",
@@ -10,15 +12,22 @@ export default function About() {
   return (
     <div className="px-2 md:px-12 border-b border-border py-12">
       <AboutMe className="md:pb-0 pb-12 px-0 " />
-      <div className="flex flex-col md:flex-row justify-between gap-4 py-12">
-        <div className="flex flex-col gap-4">
+
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        className="flex flex-col md:flex-row justify-between gap-4 py-12"
+      >
+        <motion.div variants={item} className="flex flex-col gap-4">
           <h2 className="uppercase text-primary">Skills</h2>
           <p className="text-muted-foreground">
             Here are some of the, tools, programming languages and frameworks
             I&apos;ve worked on.
           </p>
-        </div>
-        <div className="grid grid-cols-3 gap-4">
+        </motion.div>
+        <motion.div variants={item} className="grid grid-cols-3 gap-4">
           <Button variant="outline">HTML</Button>
           <Button variant="outline">CSS</Button>
           <Button variant="outline">JavaScript</Button>
@@ -45,8 +54,8 @@ export default function About() {
           <Button variant="outline">AWS</Button>
           <Button variant="outline">Windows</Button>
           <Button variant="outline">MacOS</Button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
