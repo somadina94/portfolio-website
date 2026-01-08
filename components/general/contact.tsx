@@ -2,14 +2,20 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 import ContactForm from "./contact-form";
+import { container, item } from "@/utils/motion-config";
+import * as motion from "motion/react-client";
 
 export default function Contact() {
   return (
-    <div
-      className="flex flex-col md:justify-between md:flex-row border-b border-border py-10 gap-10"
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
+      className="flex flex-col  md:flex-row border-b border-border py-10 gap-10"
       id="contact-me"
     >
-      <div className="space-y-12">
+      <motion.div variants={item} className="space-y-12 w-full">
         <h2 className="text-primary">LET&apos;S CONNECT</h2>
         <p className="max-w-lg">
           I&apos;m always looking for new opportunities and collaborations. Feel
@@ -48,8 +54,10 @@ export default function Contact() {
             </Link>
           </Button>
         </div>
-      </div>
-      <ContactForm />
-    </div>
+      </motion.div>
+      <motion.div variants={item} className="w-full flex flex-row justify-end">
+        <ContactForm />
+      </motion.div>
+    </motion.div>
   );
 }

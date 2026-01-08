@@ -3,11 +3,19 @@ import { Button } from "../ui/button";
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import williams from "@/assets/williams.jpeg";
+import * as motion from "motion/react-client";
+import { container, item } from "@/utils/motion-config";
 
 export function Hero() {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-border pb-12">
-      <div className="flex flex-col gap-4">
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
+      className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-border pb-12"
+    >
+      <motion.div variants={item} className="flex flex-col gap-4 w-full">
         <h1>
           Hello, I&apos;m
           <br /> Williams Onuaguluchi
@@ -39,8 +47,11 @@ export function Hero() {
             </Link>
           </Button>
         </div>
-      </div>
-      <div className="flex flex-col md:items-end w-full md:w-1/2">
+      </motion.div>
+      <motion.div
+        variants={item}
+        className="flex flex-col md:items-end w-full md:w-1/2"
+      >
         <Image
           src={williams}
           alt="Hero"
@@ -48,7 +59,7 @@ export function Hero() {
           width={400}
           height={600}
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
