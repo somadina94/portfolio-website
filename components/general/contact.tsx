@@ -24,7 +24,7 @@ export default function Contact() {
             href="mailto:contact@example.com"
             className="text-primary hover:text-primary/80 border-b border-primary"
           >
-            williamsonuaguluchi94@gmail.com{" "}
+            williamsonuaguluchi4991@gmail.com{" "}
           </Link>
           or checkout my{" "}
           <Link
