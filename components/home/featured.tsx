@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Card, CardContent } from "../ui/card";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { GithubIcon, GlobeIcon } from "lucide-react";
+import { Card, CardContent } from "../ui/card";
 import * as motion from "motion/react-client";
 import { container, item } from "@/utils/motion-config";
 

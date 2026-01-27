@@ -7,7 +7,7 @@ import { LightDarkToggle } from "../ui/light-dark-toggle";
 
 const navItems = [
   { label: "projects", href: "/projects" },
-  { label: "certs", href: "/certs" },
+  { label: "certifications", href: "/certs" },
   { label: "about", href: "/about" },
   { label: "contact", href: "/contact" },
 ];
