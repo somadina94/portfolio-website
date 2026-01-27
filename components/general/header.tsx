@@ -7,6 +7,7 @@ import { LightDarkToggle } from "../ui/light-dark-toggle";
 
 const navItems = [
   { label: "projects", href: "/projects" },
+  { label: "certs", href: "/certs" },
   { label: "about", href: "/about" },
   { label: "contact", href: "/contact" },
 ];
@@ -31,7 +32,7 @@ export function Header() {
           return (
             <motion.div
               key={item.label}
-              className="relative cursor-pointer text-[14px] md:text-[16px]"
+              className="relative cursor-pointer text-[10px] md:text-[16px]"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
