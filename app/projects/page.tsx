@@ -82,6 +82,7 @@ export default async function Projects() {
                   <Link
                     href={project.demolink as string}
                     className="flex gap-2 text-primary hover:text-primary/80 border-b border-primary"
+                    target="_blank"
                   >
                     LIVE DEMO
                     <GlobeIcon />
@@ -90,6 +91,7 @@ export default async function Projects() {
                   <Link
                     href={project.githublink as string}
                     className="flex gap-2 text-primary hover:text-primary/80 border-b border-primary"
+                    target="_blank"
                   >
                     GITHUB
                     <GithubIcon />
