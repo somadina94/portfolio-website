@@ -104,6 +104,7 @@ export default async function CertsPage() {
                   <Link
                     href={cert.certificate_url}
                     className="text-primary underline"
+                    target="_blank"
                   >
                     Verification link
                   </Link>
