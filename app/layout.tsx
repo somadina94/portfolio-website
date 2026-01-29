@@ -40,16 +40,16 @@ export default function RootLayout({
       >
         {/* Google Analytics */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-FDJQ4QESCB"
+          src="https://www.googletagmanager.com/gtag/js?id=G-WCMV1JRRJ7"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FDJQ4QESCB');
-          `}
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WCMV1JRRJ7');
+        `}
         </Script>
         <ThemeProvider
           attribute="class"
