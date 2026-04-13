@@ -3,16 +3,26 @@ import AboutMe from "@/components/home/about-me";
 import Featured from "@/components/home/featured";
 import { Hero } from "@/components/home/hero";
 import PageTransition from "@/components/general/page-transition";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Williams Onuaguluchi",
-  description: "Williams Onuaguluchi's portfolio home page",
+const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://williams-onuaguluchi.vercel.app";
+
+export const metadata: Metadata = {
+  title: { absolute: "Williams Onuaguluchi — Software Engineer" },
+  description:
+    "Williams Onuaguluchi — software engineer building accessible, high-performance web and mobile applications.",
+  alternates: { canonical: site },
+  openGraph: {
+    title: "Williams Onuaguluchi — Software Engineer",
+    description: "Portfolio, featured projects, and contact.",
+    url: site,
+  },
 };
 
 export default function Home() {
   return (
     <PageTransition>
-      <div className="px-2 md:px-12">
+      <div className="pt-2">
         <Hero />
         <Featured />
         <AboutMe />

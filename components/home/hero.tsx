@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { GithubIcon, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
 import williams from "@/assets/williams.jpeg";
@@ -8,58 +8,64 @@ import { container, item } from "@/utils/motion-config";
 
 export function Hero() {
   return (
-    <motion.div
+    <motion.section
       variants={container}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0.25 }}
-      className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-border pb-12"
+      animate="show"
+      className="border-b border-border/80 pb-16 pt-6 md:flex md:items-center md:justify-between md:gap-16 md:pb-24 md:pt-10"
     >
-      <motion.div variants={item} className="flex flex-col gap-4 w-full">
-        <h1>
-          Hello, I&apos;m
-          <br /> Williams Onuaguluchi
-        </h1>
-        <p className="text-muted-foreground max-w-md">
-          A Software engineer and digital nomad passionate about building
-          accessible and user friendly websites and mobile applications.
+      <motion.div variants={item} className="flex max-w-xl flex-col gap-6">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Portfolio</p>
+          <h1 className="text-balance font-serif text-4xl leading-[1.1] md:text-5xl lg:text-[3.35rem]">
+            Hello — I&apos;m Williams Onuaguluchi
+          </h1>
+        </div>
+        <p className="max-w-lg text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+          A software engineer and digital nomad focused on fast, accessible experiences on the web and
+          mobile — from product polish to solid engineering under the hood.
         </p>
-        <div className="flex gap-4">
-          <Button asChild>
-            <Link href="#contact-me">Contact</Link>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild size="lg" className="font-medium">
+            <Link href="#contact-me">Get in touch</Link>
           </Button>
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" size="lg" className="border-primary/35">
             <Link
               href="https://www.linkedin.com/in/williams-onuaguluchi-3aa8b02a1"
-              className="text-primary hover:text-primary/80"
               target="_blank"
+              rel="noopener noreferrer"
+              className="gap-2"
             >
-              <LinkedinIcon />
+              <LinkedinIcon className="size-4" />
+              LinkedIn
             </Link>
           </Button>
-          <Button asChild variant="outline">
-            <Link
-              href="https://github.com/somadina94"
-              className="text-primary hover:text-primary/80"
-              target="_blank"
-            >
-              <GithubIcon />
+          <Button asChild variant="outline" size="lg" className="border-primary/35">
+            <Link href="https://github.com/somadina94" target="_blank" rel="noopener noreferrer" className="gap-2">
+              <GithubIcon className="size-4" />
+              GitHub
             </Link>
           </Button>
         </div>
       </motion.div>
+
       <motion.div
         variants={item}
-        className="flex flex-col md:items-end w-full md:w-1/2"
+        className="relative mt-12 w-full max-w-md shrink-0 md:mt-0 md:max-w-sm lg:max-w-md"
       >
-        <Image
-          src={williams}
-          alt="Hero"
-          className="rounded-lg"
-          width={400}
-          height={600}
-        />
+        <div className="pointer-events-none absolute -inset-3 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/5 to-transparent" />
+        <div className="relative overflow-hidden rounded-2xl border border-border/80 shadow-lg">
+          <Image
+            src={williams}
+            alt="Williams Onuaguluchi"
+            width={480}
+            height={600}
+            priority
+            sizes="(min-width: 768px) 360px, 100vw"
+            className="h-auto w-full object-cover"
+          />
+        </div>
       </motion.div>
-    </motion.div>
+    </motion.section>
   );
 }
