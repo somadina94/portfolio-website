@@ -43,7 +43,7 @@ export function ProjectImageCarousel({ images, title, className }: Props) {
     return (
       <div
         className={cn(
-          "flex aspect-[4/3] w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40 text-muted-foreground",
+          "flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40 text-muted-foreground",
           className
         )}
       >
@@ -59,14 +59,14 @@ export function ProjectImageCarousel({ images, title, className }: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-        className={cn("relative overflow-hidden rounded-xl border border-border/80 shadow-md", className)}
+        className={cn("relative overflow-hidden rounded-xl border border-border/80 bg-muted/30 shadow-md", className)}
       >
-        <div className="relative aspect-[4/3] w-full bg-muted/30">
+        <div className="relative aspect-[16/10] w-full">
           <Image
             src={images[0]}
             alt={`${title} — screenshot`}
             fill
-            className="object-cover"
+            className="object-contain object-center p-1 sm:p-2"
             sizes="(min-width: 1024px) 520px, 100vw"
           />
         </div>
@@ -83,16 +83,16 @@ export function ProjectImageCarousel({ images, title, className }: Props) {
       className={cn("relative w-full", className)}
     >
       <Carousel setApi={setApi} className="w-full" opts={{ loop: true, align: "start" }}>
-        <div className="relative overflow-hidden rounded-xl border border-border/80 bg-muted/20 shadow-md">
+        <div className="relative overflow-hidden rounded-xl border border-border/80 bg-muted/30 shadow-md">
           <CarouselContent className="-ml-0">
             {images.map((src, i) => (
               <CarouselItem key={`${src}-${i}`} className="pl-0 basis-full">
-                <div className="relative aspect-[4/3] w-full">
+                <div className="relative aspect-[16/10] w-full">
                   <Image
                     src={src}
                     alt={`${title} — screenshot ${i + 1} of ${images.length}`}
                     fill
-                    className="object-cover"
+                    className="object-contain object-center p-1 sm:p-2"
                     sizes="(min-width: 1024px) 520px, 100vw"
                     loading={i === 0 ? "eager" : "lazy"}
                   />
