@@ -21,7 +21,10 @@ export const metadata: Metadata = {
 export default async function Projects() {
   const supabase = await createClient();
 
-  const { data: projects, error } = await supabase.from("projects").select("*");
+  const { data: projects, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("updated_at", { ascending: false });
 
   if (error) {
     console.error(error);

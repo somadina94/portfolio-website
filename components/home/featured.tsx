@@ -8,7 +8,8 @@ export default async function Featured() {
   const { data: featuredProjects } = await supabase
     .from("projects")
     .select("*")
-    .eq("featured", true);
+    .eq("featured", true)
+    .order("updated_at", { ascending: false });
 
   return <FeaturedProjectsClient projects={(featuredProjects ?? []) as ProjectRow[]} />;
 }

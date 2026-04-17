@@ -1,5 +1,6 @@
 export type ProjectRow = {
   id: string | number;
+  updated_at?: string | null;
   title: string;
   description: string | null;
   year: string | number | null;
