@@ -77,6 +77,42 @@ echo "📊 Checking container status..."
 sleep 5
 $DOCKER_COMPOSE ps
 
+# Verify container health status for early failure detection
+echo "❤️ Checking application health..."
+CONTAINER_NAME="williams-portfolio"
+MAX_ATTEMPTS=12
+ATTEMPT=1
+
+while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+    HEALTH_STATUS=$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' $CONTAINER_NAME 2>/dev/null)
+
+    if [ "$HEALTH_STATUS" = "healthy" ]; then
+        echo "✅ Container is healthy"
+        break
+    fi
+
+    if [ "$HEALTH_STATUS" = "unhealthy" ]; then
+        echo "❌ Container is unhealthy"
+        $DOCKER_COMPOSE logs --tail=100
+        exit 1
+    fi
+
+    if [ "$HEALTH_STATUS" = "none" ]; then
+        echo "⚠️  No healthcheck configured for $CONTAINER_NAME"
+        break
+    fi
+
+    echo "⏳ Health status: $HEALTH_STATUS (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+    sleep 5
+    ATTEMPT=$((ATTEMPT + 1))
+done
+
+if [ "$HEALTH_STATUS" != "healthy" ] && [ "$HEALTH_STATUS" != "none" ]; then
+    echo "❌ Healthcheck did not become healthy in time"
+    $DOCKER_COMPOSE logs --tail=100
+    exit 1
+fi
+
 # Show logs
 echo "📋 Recent logs:"
 $DOCKER_COMPOSE logs --tail=20
