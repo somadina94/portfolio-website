@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/browser";
+import { padPortraitToLandscape } from "@/lib/pad-portrait-to-landscape";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -100,13 +101,14 @@ export function AdminPanel() {
         const projectSlug = slugify(values.title);
         const uploads = await Promise.all(
           projectFiles.map(async (file) => {
-            const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+            const toUpload = await padPortraitToLandscape(file);
+            const ext = toUpload.name.split(".").pop()?.toLowerCase() ?? "jpg";
             const fileName = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
             const filePath = `project/${projectSlug}/${fileName}`;
 
             const { error } = await supabase.storage
               .from("project-images")
-              .upload(filePath, file, {
+              .upload(filePath, toUpload, {
                 cacheControl: "3600",
                 upsert: false,
               });
