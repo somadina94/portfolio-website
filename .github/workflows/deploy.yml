@@ -22,4 +22,5 @@ jobs:
           script: |
             cd ~/jahbyte
             sudo git pull origin master
-            sudo ./deploy-docker.sh
+            sudo chmod +x ./deploy.sh
+            sudo ./deploy.sh
