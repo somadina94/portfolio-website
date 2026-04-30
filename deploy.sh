@@ -1,26 +1,38 @@
 #!/bin/bash
 
-# EC2 Deployment Script for Williams Portfolio
+# Docker Deployment Script for Williams Portfolio
 # Run this script on your EC2 instance
 
-echo "🚀 Starting deployment of Williams Portfolio..."
+echo "🐳 Starting Docker deployment of Williams Portfolio..."
 
-# Update system packages
-echo "📦 Updating system packages..."
-sudo apt update && sudo apt upgrade -y
+# Check Docker installation
+echo "✅ Checking Docker installation..."
+docker --version
 
-# Check Node.js installation
-echo "✅ Node.js is already installed"
-node --version
-npm --version
+# Check for docker-compose or docker compose (newer versions use 'docker compose')
+if command -v docker-compose &> /dev/null; then
+    echo "✅ docker-compose found"
+    DOCKER_COMPOSE="docker-compose"
+elif docker compose version &> /dev/null; then
+    echo "✅ docker compose found"
+    DOCKER_COMPOSE="docker compose"
+else
+    echo "❌ Neither docker-compose nor docker compose found"
+    echo "📥 Installing docker-compose..."
+    # Install standalone docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    DOCKER_COMPOSE="docker-compose"
+fi
 
-# Check PM2 installation
-echo "✅ PM2 is already installed"
-pm2 --version
-
-# Create logs directory
-echo "📁 Creating logs directory..."
-mkdir -p logs
+# Add user to docker group to avoid permission issues
+if ! groups $USER | grep -q docker; then
+    echo "🔧 Adding user to docker group..."
+    sudo usermod -aG docker $USER
+    echo "⚠️  Please log out and log back in, or run: newgrp docker"
+    echo "   Then run this script again."
+    exit 1
+fi
 
 # Check for environment variables
 echo "🔍 Checking for environment variables..."
@@ -42,27 +54,71 @@ else
     exit 1
 fi
 
-# Install dependencies
-echo "📦 Installing project dependencies..."
-npm install
+# Create logs directory
+echo "📁 Creating logs directory..."
+mkdir -p logs
 
-# Build the application
-echo "🔨 Building the application..."
-npm run build
+# Stop and remove existing containers
+echo "🛑 Stopping existing containers..."
+$DOCKER_COMPOSE down
 
-# Start the application with PM2
-echo "🚀 Starting application with PM2..."
-pm2 start ecosystem.config.js --env production
+# Remove old images to free up space
+echo "🧹 Cleaning up old images..."
+docker image prune -f
 
-# Save PM2 configuration
-echo "💾 Saving PM2 configuration..."
-pm2 save
+# Build and start the application
+echo "🔨 Building and starting the application..."
+echo "🔍 Verifying environment variables are available..."
+echo "NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:0:20}..."
+$DOCKER_COMPOSE up --build -d
 
-# Setup PM2 to start on system boot
-echo "⚙️ Setting up PM2 startup script..."
-pm2 startup
+# Check if the container is running
+echo "📊 Checking container status..."
+sleep 5
+$DOCKER_COMPOSE ps
 
-echo "✅ Deployment completed!"
-echo "📊 Check PM2 status with: pm2 status"
-echo "📋 View logs with: pm2 logs"
-echo "🔄 Restart with: pm2 restart williams-portfolio" 
+# Verify container health status for early failure detection
+echo "❤️ Checking application health..."
+CONTAINER_NAME="williams-portfolio"
+MAX_ATTEMPTS=12
+ATTEMPT=1
+
+while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+    HEALTH_STATUS=$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' $CONTAINER_NAME 2>/dev/null)
+
+    if [ "$HEALTH_STATUS" = "healthy" ]; then
+        echo "✅ Container is healthy"
+        break
+    fi
+
+    if [ "$HEALTH_STATUS" = "unhealthy" ]; then
+        echo "❌ Container is unhealthy"
+        $DOCKER_COMPOSE logs --tail=100
+        exit 1
+    fi
+
+    if [ "$HEALTH_STATUS" = "none" ]; then
+        echo "⚠️  No healthcheck configured for $CONTAINER_NAME"
+        break
+    fi
+
+    echo "⏳ Health status: $HEALTH_STATUS (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+    sleep 5
+    ATTEMPT=$((ATTEMPT + 1))
+done
+
+if [ "$HEALTH_STATUS" != "healthy" ] && [ "$HEALTH_STATUS" != "none" ]; then
+    echo "❌ Healthcheck did not become healthy in time"
+    $DOCKER_COMPOSE logs --tail=100
+    exit 1
+fi
+
+# Show logs
+echo "📋 Recent logs:"
+$DOCKER_COMPOSE logs --tail=20
+
+echo "✅ Docker deployment completed!"
+echo "📊 Check status with: $DOCKER_COMPOSE ps"
+echo "📋 View logs with: $DOCKER_COMPOSE logs -f"
+echo "🔄 Restart with: $DOCKER_COMPOSE restart"
+echo "🛑 Stop with: $DOCKER_COMPOSE down" 
